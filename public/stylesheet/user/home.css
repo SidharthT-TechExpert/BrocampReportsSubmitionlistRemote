@@ -1,0 +1,357 @@
+/* Reset default styles for better consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+/* Dashboard styling */
+/* Import stunning modern font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+  --bg: #0c0c0c;
+  --text: #f5f5f5;
+  --card: rgba(25, 25, 25, 0.95);
+  --accent: #00ffd5;
+  --accent-secondary: #1db9c3;
+  --danger: #ff5555;
+  --warning: #ffc107;
+  --muted: #999;
+  --shadow: rgba(0, 255, 255, 0.2);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glow: 0 0 16px var(--accent);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 2rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, var(--danger), #c0392b);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.logout-btn:hover {
+  box-shadow: 0 0 15px var(--danger);
+  transform: scale(1.05);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.add-user-btn {
+  background-color: var(--glass);
+  color: var(--accent);
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  transition: 0.3s;
+  backdrop-filter: blur(8px);
+}
+
+.add-user-btn:hover {
+  background-color: var(--accent);
+  color: #000;
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.user-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 0 40px var(--shadow);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.03;
+  animation: rotateBg 30s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotateBg {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.user-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 45px var(--accent-secondary);
+}
+
+.user-info h3 {
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.user-info p {
+  margin: 5px 0;
+  color: var(--text);
+  z-index: 1;
+  position: relative;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  z-index: 1;
+  position: relative;
+}
+
+.btn {
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  transition: 0.3s ease;
+}
+
+.btn.blue {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.btn.orange {
+  background-color: var(--warning);
+  color: #000;
+}
+
+.btn.red {
+  background-color: var(--danger);
+  color: white;
+}
+
+.btn.cancel {
+  background-color: #444;
+  color: white;
+}
+
+.btn:hover {
+  box-shadow: 0 0 14px currentColor;
+  transform: scale(1.03);
+}
+
+/* Light mode styles */
+
+:root {
+  --bg-light: #ffffff;
+  --text-light: #111;
+  --card-light: #f0f0f0;
+  --accent-light: #007bff;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+body.light-mode .user-card {
+  background: var(--card-light);
+  box-shadow: 0 0 40px var(--shadow-light);
+}
+
+body.light-mode .add-user-btn {
+  color: var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+body.light-mode .add-user-btn:hover {
+  background-color: var(--accent-light);
+  color: white;
+}
+
+body.light-mode .logout-btn {
+  background: linear-gradient(135deg, #e74c3c, #ff7675);
+}
+
+body.light-mode .btn.blue {
+  background-color: #007bff;
+}
+
+body.light-mode .btn.orange {
+  background-color: #ffc107;
+}
+
+body.light-mode .btn.red {
+  background-color: #ff5555;
+}
+
+
+/* Modal styling */
+/* Modal Enhancements */
+.modal {
+    display: none; /* Changed from 'none' to 'flex' for demonstration, revert to 'none' by default */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+
+.modal-content {
+    background: var(--card);
+    color: var(--text);
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 0 25px var(--accent-secondary);
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    animation: popUp 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    text-align: end;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover, .close:focus {
+    color: #fff;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+form label {
+    font-weight: 600;
+    color: var(--accent);
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="text"],
+form input[type="number"] {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: var(--glass);
+    color: var(--text);
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form input[type="text"]:focus,
+form input[type="number"]:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+form small.form-desc {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+form button {
+    background-color: var(--accent);
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: var(--accent-secondary);
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popUp {
+    0% { transform: scale(0.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}

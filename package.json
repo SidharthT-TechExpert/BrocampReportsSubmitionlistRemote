@@ -1,0 +1,27 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "Login and SignUp page Using Html css js node.js express.js MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "SIDHARTH T",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.5",
+    "bootstrap-icons": "^1.11.3",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "hbs": "^4.2.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.9.7",
+    "nocache": "^4.0.0",
+    "sweetalert2": "^11.6.13"
+  }
+}

@@ -1,0 +1,180 @@
+<link rel="stylesheet" type="text/css" href="/stylesheet/user/home.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="dashboard">
+    <header class="dashboard-header">
+        <h1>Report created Data</h1>
+        <input type="text" id="message" hidden>
+        <a href="/user/logout">
+            <button class="logout-btn">Logout</button>
+        </a>
+    </header>
+
+    <section class="user-management">
+        <div class="actions">
+            <h2>Students Management</h2>
+            <button class="add-user-btn" onclick="openAddUserModal()">Add New Buddy Pair</button>
+            <button class="add-user-btn" onclick="openAddAdminModal()">Add New Admin</button>
+            <button class="add-user-btn refresh-btn" onclick="refreshAndToggleTheme()">Refresh</button>
+            <!-- <button class="add-user-btn toggle-dark" onclick="toggleDarkMode()">🌓</button> -->
+        </div>
+
+        <div class="card-grid">
+            <% users.forEach(function(user) { %>
+                <div class="user-card">
+                    <div class="user-info">
+                        <h3>Pair No: <span><%= user.pairNumber %></span></h3>
+                        <p>Buddies: <span><%= user.buddies %></span></p>
+                        <p>Report Count: <span><%= user.reportCount %></span></p>
+                    </div>
+                    <div class="card-buttons">
+                        <form action="/user/add/<%= user.pairNumber %>?_method=PUT" method="POST">
+                            <button type="submit" class="btn blue">Add</button>
+                        </form>
+                        <form action="/user/sub/<%= user.pairNumber %>?_method=PUT" method="POST">
+                            <button type="submit" class="btn orange">Sub</button>
+                        </form>
+                        <button class="btn red" onclick="openDeleteModal('<%= user.pairNumber %>')">Delete</button>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure you want to delete this pair?</h3>
+            <form id="deleteForm" method="POST">
+                <input type="hidden" name="_method" value="DELETE" />
+                <div class="modal-actions">
+                    <button type="submit" class="btn red">Yes, Delete</button>
+                    <button type="button" class="btn cancel" onclick="closeDeleteModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+ 
+
+<!-- Add User Modal -->
+<div id="addUserModal" class="modal d-flex justify-content-center align-items-center" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddUserModal()">&times;</span>
+        <h2>Add User</h2>
+        <form id="addUserForm" action="/user/addUser" method="POST">
+            <label for="addName">Buddy Pair Name:</label>
+            <input type="text" id="addName" name="name" required aria-describedby="addNameDesc">
+            <small id="addNameDesc" class="form-desc">Enter the name of the buddy pair.</small>
+
+            <label for="addCount">Number of Reports Created:</label>
+            <input type="number" id="addCount" name="count" required aria-describedby="addCountDesc">
+            <small id="addCountDesc" class="form-desc">Enter the number of reports created by this pair.</small>
+
+            <button type="submit" class="modal-btn">Add User</button>
+        </form>
+    </div>
+</div>
+
+<!-- Add Admin Modal -->
+<div id="addAdminModal"  class="modal d-flex justify-content-center align-items-center" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddAdminModal()">&times;</span>
+        <h2>Add Admin</h2>
+        <form id="addAdminForm" action="/user/addAdmin" method="POST">
+            <label for="addAdminName">Admin Name:</label>
+            <input type="text" id="addAdminName" name="name" required aria-describedby="addAdminNameDesc">
+            <small id="addAdminNameDesc" class="form-desc">Enter the name of the new admin.</small>
+
+            <label for="addAdminEmail">Email:</label>
+            <input type="email" id="addAdminEmail" name="email" required aria-describedby="addAdminEmailDesc">
+            <small id="addAdminEmailDesc" class="form-desc">Enter the email of the admin.</small>
+
+            <label for="addAdminPassword">Password:</label>
+            <input type="password" id="addAdminPassword" name="password" required aria-describedby="addAdminPasswordDesc">
+            <small id="addAdminPasswordDesc" class="form-desc">Choose a strong password.</small>
+
+            <button type="submit" class="modal-btn">Add Admin</button>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+const logoutButton = document.getElementById('logoutButton');
+const contactPage = document.getElementById('contact');
+
+function openDeleteModal(pairNumber) {
+    const form = document.getElementById('deleteForm');
+    form.action = `/user/delete/${pairNumber}?_method=DELETE`;
+    document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').style.display = 'none';
+}
+
+// Reload the page
+function refreshUserTable() {
+   window.location.href = '/user/home'; 
+   window.location.reload(); 
+}
+
+// Show the add new buddy pair 
+function openAddUserModal() {
+        document.getElementById('addUserModal').style.display = 'flex';
+    }
+
+function openAddAdminModal() {
+        document.getElementById('addAdminModal').style.display = 'flex'; 
+    }
+
+// Close the add new buddy pair modal
+function closeAddUserModal() {
+        document.getElementById('addUserModal').style.display = 'none';
+    }
+
+function closeAddAdminModal() {
+        document.getElementById('addAdminModal').style.display = 'none'; 
+    }
+
+// Confirm delete action
+    function confirmDelete(event, pairNumber) {
+        event.preventDefault(); // Stop the default form submit
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `User with Pair Number ${pairNumber} will be deleted!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit the form manually
+                event.target.submit();
+            }
+        });
+
+        return false; // Ensure the form doesn't submit automatically
+    }
+
+ // Toggle dark mode and refresh the user table
+    function refreshAndToggleTheme() {
+    toggleDarkMode();
+    refreshUserTable();
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("light-mode");
+  }
+
+  function refreshUserTable() {
+    // You can customize this logic if it's a full reload or AJAX
+    location.reload(); // Reload the page for now
+  }
+</script>
