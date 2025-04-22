@@ -48,6 +48,8 @@ app.use('*',(req,res) => {
 // Connect to the database
 connectDB();
 
+//trailing purpose added to check if the server is running or not
+
 // Start the server
 app.listen(port , () => {
     console.log('===================================');
