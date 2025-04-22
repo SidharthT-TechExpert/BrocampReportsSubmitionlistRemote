@@ -1,33 +1,52 @@
 <link rel="stylesheet" href="/stylesheet/user/login.css">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
 <div class="login-panel">
     <div class="key-icon">
-        <img src="/img/key_img.png" alt="" style="height: 200px;">
+        <img src="/img/key_img.png" alt="key image" class="key-img">
     </div>
-    <h2>ADMIN PANEL</h2>
+    <h2>Admin Panel Login</h2>
     <form id="login-form" action="/user/login" method="post">
-        <!-- Hidden input to pass server message -->
         <input type="hidden" id="message" value="<%= message %>">
-        
-        <div class="form-group">
-            <input name="email" id="Email" type="email" class="form-control" placeholder="Email">
+
+        <!-- Email Input -->
+        <div class="form-group mb-4">
+            <label for="Email" class="form-label">Email</label>
+            <div class="input-icon">
+                <i class="fas fa-envelope"></i>
+                <input name="email" id="Email" type="email" class="form-control fancy-input" placeholder="Enter your email" required>
+            </div>
         </div>
-        <div class="form-group">
-            <input name="password" id="Password" type="password" class="form-control" placeholder="Password">
+
+        <!-- Password Input -->
+        <div class="form-group mb-4">
+            <label for="Password" class="form-label">Password</label>
+            <div class="input-icon">
+                <i id="toggle-lock" class="fas fa-lock password-lock-left" onclick="togglePassword()"></i>
+                <input name="password" id="Password" type="password" class="form-control fancy-input" placeholder="Enter your password" required>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+        <!-- <div class="form-group mb-4 d-flex justify-content-between">
+            <a href="/forgot-password" class="text-light small">Forgot password?</a>
+            <a href="/register" class="text-light small">Register</a>
+        </div> -->
+
+        <button type="submit" class="btn btn-primary btn-block login-btn">
+            <span id="login-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            <span id="login-text">Login</span>
+        </button>
     </form>
 </div>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector('#login-form').addEventListener('submit', formValidateLogin);
+        const form = document.querySelector('#login-form');
+        form.addEventListener('submit', formValidateLogin);
 
-        // Show alert immediately if there's a message from server
         const message = document.getElementById('message').value;
         if (message === 'Invalid Password' || message === 'Invalid credentials') {
             Swal.fire({
@@ -38,22 +57,60 @@
         }
     });
 
+    function togglePassword() {
+        const passwordField = document.getElementById('Password');
+        const lockIcon = document.getElementById('toggle-lock');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            lockIcon.classList.remove('fa-lock');
+            lockIcon.classList.add('fa-unlock');
+        } else {
+            passwordField.type = 'password';
+            lockIcon.classList.remove('fa-unlock');
+            lockIcon.classList.add('fa-lock');
+        }
+    }
+
     function formValidateLogin(e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
+
         const email = document.getElementById('Email').value.trim();
         const password = document.getElementById('Password').value.trim();
+        const spinner = document.getElementById('login-spinner');
+        const loginText = document.getElementById('login-text');
 
-        if (email === '' || password === '') {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !password) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "All Fields Are Required!"
+                text: "All fields are required!"
             });
-            return false;
+            return;
         }
 
-        // If validation passes
+        if (!emailPattern.test(email)) {
+            Swal.fire({
+                icon: "warning",
+                title: "Invalid Email",
+                text: "Please enter a valid email address."
+            });
+            return;
+        }
+
+        if (password.length < 6) {
+            Swal.fire({
+                icon: "warning",
+                title: "Weak Password",
+                text: "Password must be at least 6 characters long."
+            });
+            return;
+        }
+
+        spinner.classList.remove('d-none');
+        loginText.textContent = "Logging in...";
         e.target.submit();
-        return true;
     }
 </script>
