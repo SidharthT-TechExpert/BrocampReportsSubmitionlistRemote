@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const userRouter = require('./routes/user');
-const hbs = require('hbs');
 const connectDB = require('./db/connectDB');
 const session = require('express-session'); 
 const nocache = require('nocache');
