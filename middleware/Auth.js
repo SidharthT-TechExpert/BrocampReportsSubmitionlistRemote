@@ -10,7 +10,6 @@ const checkSession = (req, res, next) => {
 
 const isLogin = async(req, res, next) => {
 
-    req.session.user = req.session.user || true;
     if (!req.session.user) {
         return next();
     }

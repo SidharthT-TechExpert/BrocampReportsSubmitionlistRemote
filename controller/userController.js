@@ -172,7 +172,7 @@ const deletePair = async (req, res) => {
 
 const addAdmin = async (req, res) => {
     try {
-        const { name, email, password } = req.body; // Destructure name, email, and password from request body
+        const { email, password } = req.body; // Destructure name, email, and password from request body
 
         const user = await adminSchema.findOne({ email }); // Check if user already exists
 
@@ -184,10 +184,9 @@ const addAdmin = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds); // Hash the password
 
         const newUser = await adminSchema({
-            name,
             email,
             password: hashedPassword, // Create new user with hashed password
-        });
+        }); 
 
         await newUser.save(); // Save the new user to the database
         req.session.message = "User created successfully";
