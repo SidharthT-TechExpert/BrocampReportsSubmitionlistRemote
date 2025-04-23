@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
     pairNumber:{
         type:Number,
         required:true,
+        unique:true,
     },
     buddies:{
         type:String,
