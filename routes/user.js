@@ -9,14 +9,14 @@ routes.get('/user', auth.isLogin, userController.loadlogin);
 routes.get('/login', auth.isLogin, userController.loadlogin);
 routes.get('/home', auth.isLogin, userController.loadHome);
 routes.get('/logout', auth.checkSession, userController.logout);
- 
+
 
 //Post Methods 
 routes.post('/login' , userController.login);
 routes.post('/signUp' , userController.registerUser);
 routes.post('/addUser' , userController.addUser);
 routes.post('/addAdmin' , userController.addAdmin);
-
+ 
 //Put Methods
 routes.put("/add/:no" , userController.add);
 routes.put("/sub/:no" , userController.sub);

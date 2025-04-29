@@ -35,11 +35,11 @@ body {
     
     .login-panel .form-control:focus {
 	border-color: #26c6da;
-	box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+	box-shadow: 0 0 15px rgba(3, 193, 218, 0.5);
 	background-color: rgba(255, 255, 255, 0.05);
     }
     
-    .input-icon {
+    .input-icon { 
 	position: relative;
 	display: flex;
 	align-items: center;

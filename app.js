@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const userRouter = require('./routes/user');
+const userRouter = require('./routes/user'); 
 const connectDB = require('./db/connectDB');
 const session = require('express-session'); 
 const nocache = require('nocache');
@@ -26,7 +26,7 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     cookie:{
-        maxAge: 30 * 60 * 1000 // 30 minutes
+        maxAge: 30 * 60 * 1000  // 30 minutes
     }
 }))
 

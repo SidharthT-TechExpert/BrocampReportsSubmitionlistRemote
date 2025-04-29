@@ -198,8 +198,12 @@ const addAdmin = async (req, res) => {
 }
 // Function to handle user logout
 const logout = (req, res) => {
-  req.session.user = false;
-  req.session.message = "User Log out successfully"; // Set message in session
+
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err); // Log error if session destruction fails
+    }
+  });
   res.redirect("/"); // Redirect to login page
 };
 
