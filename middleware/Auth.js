@@ -19,37 +19,8 @@ const isLogin = async(req, res, next) => {
     res.render('user/home',{users});
 }
 
-const wrong = (req, res) => {
-    req.session.message = 'Invalid Credentials';
-    res.redirect('/');
-}
-
-const names = [
-    "ABDUL HALIQ BM",
-    "Aifa Sana uk",
-    "Akhil joy",
-    "Arun Narayan Nair",
-    "CHRISTIN JOHNY",
-    "Chitra",
-    "Fasalu Rahman",
-    "Jasima",
-    "Kadeejatu zaiba",
-    "Karthik B",
-    "Krishna",
-    "Midhun Manoj",
-    "Neethu George",
-    "Praveena",
-    "Riyas kv",
-    "Sidharth T",
-    "Thaskeem",
-    "Visal s Vijayan",
-    "Adarash Babu",
-    "Aswathy K"
-  ];
-names.sort((a,b) => a.localeCompare(b));
-console.log(names);  
+ 
 module.exports = {
     checkSession,
     isLogin,
-    wrong
 };

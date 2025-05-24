@@ -15,7 +15,7 @@ require('dotenv').config();
 
   
 // port setup
-const port = process.env.PORT || 3000 ; 
+const port = process.env.PORT || 3000 ;
 
 // Middleware setup
 app.use(express.urlencoded({extended:true})); 
@@ -26,7 +26,7 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     cookie:{
-        maxAge: 30 * 60 * 1000  // 30 minutes
+        maxAge: 0.1 * 60 * 60 * 1000  // 0.1 hours in milliseconds
     }
 }))
 
