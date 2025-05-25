@@ -49,20 +49,10 @@ app.use('*',(req,res) => {
 // Connect to the database
 connectDB();
 
-const fs = require('fs')
-
-try {
-     d = 2/0 ;
-    fs.unlink('',()=>{
-    console.log("finished")
-}) 
-} catch (error) {
-    console.log('Error from fs:',error);
-}
-
 // Start the server
 app.listen(port , () => {
     console.log('===================================');
     console.log(`  Server is running on port ${port}`); 
     console.log('===================================');
 })
+
