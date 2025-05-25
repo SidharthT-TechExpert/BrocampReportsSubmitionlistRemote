@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const app = express();
 const userRouter = require('./routes/user'); 
@@ -47,6 +49,16 @@ app.use('*',(req,res) => {
 // Connect to the database
 connectDB();
 
+const fs = require('fs')
+
+try {
+     d = 2/0 ;
+    fs.unlink('',()=>{
+    console.log("finished")
+}) 
+} catch (error) {
+    console.log('Error from fs:',error);
+}
 
 // Start the server
 app.listen(port , () => {

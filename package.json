@@ -2,14 +2,23 @@
   "name": "login",
   "version": "1.0.0",
   "description": "Login and SignUp page Using Html css js node.js express.js MongoDB",
+  "homepage": "https://github.com/SidharthT-TechExpert/BrocampReportsSubmitionlistRemote#readme",
+  "bugs": {
+    "url": "https://github.com/SidharthT-TechExpert/BrocampReportsSubmitionlistRemote/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SidharthT-TechExpert/BrocampReportsSubmitionlistRemote.git"
+  },
+  "license": "ISC",
+  "author": "SIDHARTH T",
+  "type": "commonjs",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "SIDHARTH T",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.5",
@@ -22,5 +31,8 @@
     "mongoose": "^8.9.7",
     "nocache": "^4.0.0",
     "sweetalert2": "^11.6.13"
+  },
+  "devDependencies": {
+    "globals": "^16.1.0"
   }
 }

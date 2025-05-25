@@ -196,6 +196,7 @@ const addAdmin = async (req, res) => {
         console.log(error); // Log the error
     }
 }
+
 // Function to handle user logout
 const logout = (req, res) => {
 
