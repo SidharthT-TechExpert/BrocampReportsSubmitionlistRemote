@@ -1,4 +1,5 @@
 const userSchema = require("../model/userModel"); // Import the user model
+const adminSchema = require("../model/adminModel"); // Import the admin model
 const bcrypt = require("bcrypt"); // Import bcrypt for password hashing
 const saltRounds = 10; // Define the number of salt rounds for bcrypt
 
@@ -30,8 +31,6 @@ const registerUser = async (req, res) => {
     console.log(error); // Log the error
   }
 }; 
-
-const adminSchema = require("../model/adminModel"); // Import the admin model
 
 // Function to handle user login
 const login = async (req, res) => {
