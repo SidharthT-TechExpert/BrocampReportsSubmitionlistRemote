@@ -14,7 +14,8 @@ const isLogin = async(req, res, next) => {
         return next();
     }
     const email = req.session.user || true;
-    const users = await userModel.find({}).sort({pairNumber: 1});
+    const users = await userModel.find({});
+    users.sort((a,b) => parseInt(a.pairNumber) - parseInt(b.pairNumber));
 
     res.render('user/home',{users});
 }

@@ -76,8 +76,9 @@ const loadHome = async (req, res) => {
 
 const add = async (req, res) => {
     try {
-      const pairNumber = parseInt(req.params.no, 10); // Ensure base 10
-  
+      const pNo = Number(req.params.no);
+      const pairNumber = parseInt(pNo, 10); // Ensure base 10
+        
       const user = await userSchema.findOneAndUpdate(
         { pairNumber },
         { $inc: { reportCount: 1 } },
