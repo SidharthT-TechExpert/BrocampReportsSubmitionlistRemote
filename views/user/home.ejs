@@ -5,9 +5,8 @@
     <header class="dashboard-header">
         <h1>BCR 71 - Group 1</h1>
         <input type="text" id="message" hidden>
-        <form action="/user/logout">
-            <button class="logout-btn">Logout</button>
-        </form>
+            <button class="logout-btn"  onclick="openLogOutModal()">Logout</button>
+        
     </header>
 
     <section class="user-management">
@@ -41,7 +40,7 @@
         </div>
     </section>
 
-    <!-- Modal -->
+    <!--Delet Modal -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
             <h3>Are you sure you want to delete this pair?</h3>
@@ -56,7 +55,20 @@
     </div>
 </div>
 
-
+   <!--Logout Modal -->
+    <div id="logOutModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure want to logout this page ?</h3>
+            <form id="logOutForm" method="POST">
+                <input type="hidden" name="_method" value="DELETE" />
+                <div class="modal-actions">
+                    <button type="submit" class="btn red">Yes</button>
+                    <button type="button" class="btn cancel" onclick="closeLogOutModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
  
 
 <!-- Add User Modal -->
@@ -113,9 +125,20 @@ function openDeleteModal(pairNumber) {
     document.getElementById('deleteModal').style.display = 'flex';
 }
 
+
+function openLogOutModal() {
+    const form = document.getElementById('logOutForm');
+    form.action = `/user/logout?_method=GET`;
+    document.getElementById('logOutModal').style.display = 'flex';
+}
+
 function closeDeleteModal() {
     document.getElementById('deleteModal').style.display = 'none';
 } 
+
+function closeLogOutModal() {
+    document.getElementById('logOutModal').style.display = 'none';
+}
 
 // Reload the page
 function refreshUserTable() {

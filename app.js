@@ -38,9 +38,10 @@ app.use(nocache());
 app.set('view engine','ejs');
 app.use(express.static('public')); 
 
+app.locals.siteName = 'Sidharth T'
 // set up routes
 app.use('/user',userRouter);
-app.use('/',userRouter); 
+app.use('/',userRouter);  
 
 app.use('*',(req,res) => {
     res.redirect('/user');
